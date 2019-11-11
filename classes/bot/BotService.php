@@ -26,6 +26,7 @@ class BotService {
         if (!empty($response['message'])) {
             $this->repository->sendMessage($response, $this->bot->getUserId());
         }
+        return $this;
     }
 
 }
