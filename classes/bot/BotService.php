@@ -20,7 +20,7 @@ class BotService {
 
     public function setEvent($commands, $dataCallback) {
         if (!in_array($this->bot->getCommand(), $commands)) {
-            return false;
+            return $this;
         }
         $response = $dataCallback($this->bot);
         if (!empty($response['message'])) {
