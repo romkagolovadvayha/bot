@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<phpunit
+    bootstrap="../../conf/bootstrap.php">
+    <testsuites>
+        <testsuite name="../phpunit">
+            <directory suffix=".php">../</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
