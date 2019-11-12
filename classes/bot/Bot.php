@@ -6,12 +6,12 @@ class Bot {
 
     private $command;
     private $repository;
-    private $user_id;
+    private $params;
 
-    public function __construct($repository, $command, $user_id) {
+    public function __construct($repository, $command, $params) {
         $this->repository = $repository;
         $this->command = $command;
-        $this->user_id = $user_id;
+        $this->params = $params;
     }
 
     public function getRepository() {
@@ -21,8 +21,8 @@ class Bot {
     public function getCommand() {
         return $this->command;
     }
-    public function getUserId() {
-        return $this->user_id;
+    public function getParams() {
+        return $this->params;
     }
 
 }

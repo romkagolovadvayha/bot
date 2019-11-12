@@ -14,10 +14,16 @@ class BotVKRepository
         $this->VKApiClient = new VKApiClient();
     }
 
-    public function sendMessage($data, $user_id)
+    public function sendMessage($data, $botParams)
     {
+        if (empty($botParams['user_id'])) {
+            return false;
+        }
+        if (empty($botParams['access_token'])) {
+            return false;
+        }
         $params = [];
-        $params['user_id'] = $user_id;
+        $params['user_id'] = $botParams['user_id'];
         if (!empty($data['buttons'])) {
             $keyboard = [];
             $keyboard['one_time'] = true;
@@ -51,14 +57,20 @@ class BotVKRepository
         if (!empty($data['attachment'])) {
             $params['attachment'] = $data['attachment'];
         }
-        $response = $this->VKApiClient->messages()->send(\Config::$ACCESS_TOKEN_VK, $params);
+        $response = $this->VKApiClient->messages()->send($botParams['access_token'], $params);
         return $response;
     }
 
-    public function getUserInfo($user_id)
+    public function getUserInfo($botParams)
     {
-        $response = $this->VKApiClient->users()->get(\Config::$ACCESS_TOKEN_VK, [
-            'user_ids' => [$user_id]
+        if (empty($botParams['user_id'])) {
+            return false;
+        }
+        if (empty($botParams['access_token'])) {
+            return false;
+        }
+        $response = $this->VKApiClient->users()->get($botParams['access_token'], [
+            'user_ids' => [$botParams['user_id']]
         ]);
         return $response;
     }

@@ -2,7 +2,8 @@
 
 namespace bot;
 
-class BotService {
+class BotService
+{
 
     /*
      * @var \bot\Bot
@@ -11,22 +12,33 @@ class BotService {
     private $bot;
     private $repository;
 
-    public function __construct($bot) {
+    public function __construct($bot)
+    {
         $this->bot = $bot;
         $classRepository = $bot->getRepository();
         $this->repository = new $classRepository();
     }
 
 
-    public function setEvent($commands, $dataCallback) {
+    public function setEvent($commands, $dataCallback)
+    {
         if (!in_array($this->bot->getCommand(), $commands)) {
             return $this;
         }
         $response = $dataCallback($this->bot);
         if (!empty($response['message'])) {
-            $this->repository->sendMessage($response, $this->bot->getUserId());
+            $this->repository->sendMessage($response, $this->bot->getParams());
         }
         return $this;
     }
 
+    public function getRepository()
+    {
+        return $this->repository;
+    }
+
+    public function getBot()
+    {
+        return $this->bot;
+    }
 }

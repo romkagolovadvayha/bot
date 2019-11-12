@@ -1,6 +1,7 @@
 {
     "require": {
-        "vkcom/vk-php-sdk": "^5.101"
+        "vkcom/vk-php-sdk": "^5.101",
+        "mgp25/instagram-php": "^7.0"
     },
     "autoload": {
         "classmap": [
